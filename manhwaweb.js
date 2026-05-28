@@ -1,6 +1,12 @@
 /**
- * Extensión de ManhwaWeb para Mangayomi
- * Basada en el patrón MProvider (Referencia AnimeFLV)
+ * Extension de ManhwaWeb para Mangayomi
+ * Basada en el patron MProvider
+ * 
+ * CONFIGURACION REQUERIDA EN MANGAYOMI:
+ * Name: ManhwaWeb
+ * Base URL: https://manhwaweb.com
+ * API URL: https://manhwawebbackend-production.up.railway.app
+ * Icon URL: https://manhwaweb.com/assets/favicon-32x32.png
  */
 
 class DefaultExtension extends MProvider {
@@ -9,7 +15,7 @@ class DefaultExtension extends MProvider {
      */
     async getPopular(page) {
         const apiUrl = this.source.apiUrl;
-        // ManhwaWeb usa paginación desde 0
+        // ManhwaWeb usa paginacion desde 0
         const res = await new Client().get(`${apiUrl}/manhwa/library?page=${page - 1}`);
         const data = JSON.parse(res.body);
         
@@ -26,14 +32,14 @@ class DefaultExtension extends MProvider {
     }
 
     /**
-     * Obtiene las actualizaciones más recientes.
+     * Obtiene las actualizaciones mas recientes.
      */
     async getLatestUpdates(page) {
         return await this.getPopular(page);
     }
 
     /**
-     * Realiza una búsqueda por texto.
+     * Realiza una busqueda por texto.
      */
     async search(query, page, filters) {
         const apiUrl = this.source.apiUrl;
@@ -53,7 +59,7 @@ class DefaultExtension extends MProvider {
     }
 
     /**
-     * Obtiene los detalles de una obra y su lista de capítulos.
+     * Obtiene los detalles de una obra y su lista de capitulos.
      */
     async getDetail(url) {
         const apiUrl = this.source.apiUrl;
@@ -69,7 +75,7 @@ class DefaultExtension extends MProvider {
 
         const genre = data._categoris.map(cat => Object.values(cat)[0]);
         const chapterList = data.chapters.map(ch => ({
-            name: `Capítulo ${ch.chapter}`,
+            name: `Capitulo ${ch.chapter}`,
             url: ch.link.split('/').pop(),
             dateUpload: ch.create ? ch.create.toString() : ""
         })).reverse();
@@ -83,7 +89,7 @@ class DefaultExtension extends MProvider {
     }
 
     /**
-     * Obtiene las imágenes de un capítulo específico.
+     * Obtiene las imagenes de un capitulo especifico.
      */
     async getPageList(url) {
         const apiUrl = this.source.apiUrl;
