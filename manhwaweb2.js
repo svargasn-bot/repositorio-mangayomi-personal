@@ -1,7 +1,13 @@
 /**
- * Extension de ManhwaWeb para Mangayomi (Version Windows-Proof)
+ * Extension de ManhwaWeb para Mangayomi
+ * Basada en el patron MProvider
+ * 
+ * CONFIGURACION REQUERIDA EN MANGAYOMI:
+ * Name: ManhwaWeb
+ * Base URL: https://manhwaweb.com
+ * API URL: https://manhwawebbackend-production.up.railway.app
+ * Icon URL: https://manhwaweb.com/assets/favicon-32x32.png
  */
-
 class DefaultExtension extends MProvider {
     // Funcion interna para asegurar que usamos la API correcta
     getApiUrl() {
